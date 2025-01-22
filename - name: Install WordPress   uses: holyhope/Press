@@ -1,2 +1,0 @@
-- name: Install WordPress
-  uses: holyhope/install-wordpress-github-action@v2.2.1
