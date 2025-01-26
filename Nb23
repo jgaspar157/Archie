@@ -1,0 +1,48 @@
+def detect_pattern(numbers):
+    """
+    Analyzes a sequence of numbers and detects the most likely pattern type.
+
+    Args:
+        numbers (list): List of numbers to analyze.
+
+    Returns:
+        str: Detected pattern type.
+    """
+    if len(numbers) < 2:
+        return "Not enough data to detect a pattern."
+
+    # Check if all numbers are the same (Constant pattern)
+    if all(num == numbers[0] for num in numbers):
+        return "Constant pattern"
+
+    # Check for Arithmetic Progression
+    diff = numbers[1] - numbers[0]
+    if all(numbers[i] - numbers[i - 1] == diff for i in range(2, len(numbers))):
+        return f"Arithmetic progression with a common difference of {diff}"
+
+    # Check for Geometric Progression
+    if numbers[0] != 0 and all(numbers[i] / numbers[i - 1] == numbers[1] / numbers[0] for i in range(2, len(numbers))):
+        ratio = numbers[1] / numbers[0]
+        return f"Geometric progression with a common ratio of {ratio}"
+
+    # Check for Fibonacci-like sequence
+    if len(numbers) >= 3 and all(numbers[i] == numbers[i - 1] + numbers[i - 2] for i in range(2, len(numbers))):
+        return "Fibonacci-like sequence"
+
+    # If no pattern is recognized
+    return "No clear pattern detected"
+
+def main():
+    print("Welcome to the Number Pattern Recognizer!")
+    print("Enter a sequence of numbers separated by spaces (e.g., 1 2 3 4):")
+    
+    try:
+        user_input = input("Enter your sequence: ")
+        numbers = list(map(float, user_input.strip().split()))
+        pattern = detect_pattern(numbers)
+        print(f"Detected Pattern: {pattern}")
+    except ValueError:
+        print("Invalid input. Please enter numbers only.")
+
+if __name__ == "__main__":
+    main()
