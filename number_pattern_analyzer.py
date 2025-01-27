@@ -1,4 +1,6 @@
-import streamlit as st
+
+        
+    import streamlit as st
 import numpy as np
 
 # Function to analyze the sequence
@@ -6,6 +8,9 @@ def analyze_sequence(sequence):
     n = len(sequence)
     if n < 2:
         return "The sequence is too short to identify a pattern."
+
+    # Convert sequence to NumPy array
+    sequence = np.array(sequence)
 
     # Check for arithmetic sequence
     diffs = np.diff(sequence)
@@ -30,11 +35,11 @@ def analyze_sequence(sequence):
         return "Fibonacci-like sequence."
 
     # Check for squares
-    if all(np.sqrt(sequence) % 1 == 0):
+    if np.all(np.sqrt(sequence) % 1 == 0):
         return "Sequence of perfect squares."
 
     # Check for cubes
-    if all(np.cbrt(sequence) % 1 == 0):
+    if np.all(np.cbrt(sequence) % 1 == 0):
         return "Sequence of perfect cubes."
 
     # If no pattern is found
