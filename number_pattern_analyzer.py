@@ -13,9 +13,12 @@ def analyze_sequence(sequence):
         return f"Arithmetic sequence with a common difference of {diffs[0]}."
 
     # Check for geometric sequence
-    if np.all(sequence[1:] / sequence[:-1] == sequence[1] / sequence[0]):
-        ratio = sequence[1] / sequence[0]
-        return f"Geometric sequence with a common ratio of {ratio}."
+    try:
+        ratios = sequence[1:] / sequence[:-1]
+        if np.all(ratios == ratios[0]):
+            return f"Geometric sequence with a common ratio of {ratios[0]}."
+    except ZeroDivisionError:
+        return "Division by zero encountered while checking for a geometric sequence."
 
     # Check for Fibonacci-like sequence
     is_fibonacci = True
